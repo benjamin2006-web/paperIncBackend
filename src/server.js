@@ -43,7 +43,7 @@ app.use(compression());
 
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+    origin: ['https://paper-inc.vercel.app', 'https://paper-inc.vercel.app'],
     credentials: true,
   }),
 );
@@ -105,6 +105,7 @@ app.use(errorHandler);
 
 if (!process.env.MONGODB_URI) {
   console.error('❌ MONGODB_URI is not defined');
+   console.log("🔍 MONGODB_URI:", process.env.MONGODB_URI);
   process.exit(1);
 }
 
@@ -112,6 +113,7 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('✅ Connected to MongoDB');
+     console.log("🔍 MONGODB_URI:", process.env.MONGODB_URI);
 
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`🚀 Server running on port ${PORT}`);
@@ -120,5 +122,6 @@ mongoose
   })
   .catch((error) => {
     console.error('❌ MongoDB connection error:', error.message);
+     console.log("🔍 MONGODB_URI:", process.env.MONGODB_URI);
     process.exit(1);
   });
